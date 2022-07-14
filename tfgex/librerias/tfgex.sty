@@ -1,0 +1,288 @@
+%% tfgex.sty
+%% Copyright 2022 Martín Fernández de Diego
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The complete version of this license is in https://github.com/martinfdezdg.
+%
+% This work has the LPPL maintenance status 'maintained'.
+% 
+% The Current Maintainer of this work is Martín Fernández de Diego.
+%
+% This work consists of the file tfgex.sty developed to stablish a normalized format for the Complutense University of Madrid final degree projects.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{librerias/tfgex}
+
+% PACKAGES %
+% UTF8
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+% Español
+\RequirePackage[spanish,es-noshorthands]{babel}
+% Fuente
+\RequirePackage{tgadventor}
+% Comentar varias líneas
+\RequirePackage{verbatim}
+% Pequeñas mayúsculas y negrita
+\RequirePackage[T1]{fontenc}
+% Fórmulas matemáticas
+\RequirePackage{amsmath}
+% Términos matemáticos
+\RequirePackage{amsthm}
+% Símbolos matemáticos
+\RequirePackage{amssymb}
+\RequirePackage{mathrsfs}
+% Listas
+\RequirePackage{enumerate}
+% Márgenes y disposición
+\RequirePackage{geometry}
+% Multicolumna
+\RequirePackage{multicol}
+% Imágenes
+\RequirePackage{graphicx}
+\RequirePackage{subfig}
+\RequirePackage{float}
+% Colores
+\RequirePackage[dvipsnames]{xcolor}
+% URL
+\RequirePackage{url}
+% Cálculos en código
+\RequirePackage{calc}
+\RequirePackage{xifthen}
+% Tikz
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+% Secciones
+\RequirePackage{titlesec}
+\RequirePackage{appendix}
+% Calculos en LaTeX
+\RequirePackage{calc}
+% Referencias
+\RequirePackage[hidelinks]{hyperref}
+% Texto dummy
+\RequirePackage{lipsum}
+
+% DECLARATIONS %
+\def\degree#1{\gdef\@degree{#1}}
+\def\degreedate#1{\gdef\@degreedate{#1}}
+\def\department#1{\gdef\@department{#1}}
+\def\college#1{\gdef\@college{#1}}
+\def\university#1{\gdef\@university{#1}}
+\def\tutor#1{\gdef\@tutor{#1}}
+
+\def\englishdegree#1{\gdef\@englishdegree{#1}}
+\def\englishtitle#1{\gdef\@englishtitle{#1}}
+\def\englishdepartment#1{\gdef\@englishdepartment{#1}}
+\def\englishcollege#1{\gdef\@englishcollege{#1}}
+\def\englishuniversity#1{\gdef\@englishuniversity{#1}}
+
+\def\vspacemid{\par\vspace{.5\baselineskip}}
+\def\vspacedefault{\par\vspace{\baselineskip}}
+
+% FIGURES %
+\def\coa{{\includegraphics{imagenes/escudo_color_UCM.png}}}
+\def\englishcoa{{\includegraphics{imagenes/escudo_bw_UCM.png}}}
+
+% LAYOUT %
+% Title page
+\renewcommand{\maketitle}{
+    \newgeometry{top=2cm, bottom=3.5cm, left=2.7cm, right=2.7cm}
+    \thispagestyle{empty}
+    \vspace*{\fill}
+    \begin{center}
+        {\fontsize{11}{13.2}\selectfont \textsc{Trabajo de Fin de Grado presentado para el {\@degree}} \par}
+        \vspace*{2cm}
+        {\fontsize{25}{30}\selectfont \textsc{\textbf{ {\@title} }} \par}
+        \vspace*{2cm}
+        {\coa \par}
+        \vspace*{2cm}
+        {\fontsize{12}{14.4}\selectfont
+            {\textit{Autor} \par \fontsize{14}{16.8}\selectfont{\@author} \par}
+            \vspace*{2ex}
+            {\textit{Tutor} \par \fontsize{14}{16.8}\selectfont{\@tutor} \par}
+        }
+        \vspace*{2cm}
+        {\fontsize{12}{14.4}\selectfont 
+            {{\@department} \par}
+            \vspace*{1ex}
+            {{\@college} \par}
+            \vspace*{1ex}
+            {{\@university} \par}
+            \vspace*{1.5ex}
+            {{\@degreedate}}
+        }
+    \end{center}
+    \vspace*{\fill}
+    \restoregeometry
+    
+    \newpage\thispagestyle{empty}~\newpage
+    
+    \newgeometry{top=2cm, bottom=3.5cm, left=2.7cm, right=2.7cm}
+    \thispagestyle{empty}
+    \vspace*{\fill}
+    \begin{center}
+        {\fontsize{11}{13.2}\selectfont \textsc{Final Degree Project presented for the {\@englishdegree}} \par}
+        \vspace*{2cm}
+        {\fontsize{25}{30}\selectfont \textsc{\textbf{ {\@englishtitle} }} \par}
+        \vspace*{2cm}
+        {\englishcoa \par}
+        \vspace*{2cm}
+        {\fontsize{12}{14.4}\selectfont
+            {\textit{Author} \par \fontsize{14}{16.8}\selectfont{\@author} \par}
+            \vspace*{2ex}
+            {\textit{Tutor} \par \fontsize{14}{16.8}\selectfont{\@tutor} \par}
+        }
+        \vspace*{2cm}
+        {\fontsize{12}{14.4}\selectfont 
+            {{\@englishdepartment} \par}
+            \vspace*{1ex}
+            {{\@englishcollege} \par}
+            \vspace*{1ex}
+            {{\@englishuniversity} \par}
+            \vspace*{1.5ex}
+            {{\@degreedate}}
+        }
+    \end{center}
+    \vspace*{\fill}
+    \restoregeometry
+    
+    \newpage\thispagestyle{empty}
+    
+    \newgeometry{top=2cm, bottom=3.5cm, left=2.7cm, right=2.7cm}
+    \thispagestyle{empty}
+    \restoregeometry
+}
+
+\newenvironment{dedication}
+{
+    \thispagestyle{empty}
+    \vspace*{\stretch{1}}
+    \itshape
+    \raggedleft
+}
+{
+    \par
+    \vspace{\stretch{3}}
+    \clearpage
+}
+
+% Special formats
+\newcommand\todonote[1]{\textcolor{BrickRed}{#1}}
+\newcommand\note[1]{\textcolor{RoyalBlue}{#1}}
+
+% Math environments
+\newcounter{mathtermscounter}[section]
+\renewcommand{\themathtermscounter}{\thesection.\arabic{mathtermscounter}}
+
+% definition
+\newenvironment{definition}[2][]%
+{
+    \refstepcounter{mathtermscounter}%
+    \noindent\textbf{Definición \themathtermscounter. (#2)}\par%
+    \noindent\ignorespaces
+}
+{
+    \noindent\ignorespacesafterend
+}
+
+% theorem
+\newenvironment{theorem}[1][]%
+{
+    \refstepcounter{mathtermscounter}%
+    \noindent\textbf{Teorema \themathtermscounter. \ifthenelse{\isempty{#1}}{}{(#1) }}%
+    \begin{itshape}%
+    \noindent\ignorespaces
+}
+{
+    \end{itshape}%
+    \noindent\ignorespacesafterend
+}
+
+% lemma
+\newenvironment{lemma}[1][]%
+{
+    \refstepcounter{mathtermscounter}%
+    \noindent\textbf{Lema \themathtermscounter. \ifthenelse{\isempty{#1}}{}{(#1) }}%
+    \begin{itshape}%
+    \noindent\ignorespaces
+}
+{
+    \end{itshape}%
+    \noindent\ignorespacesafterend
+}
+
+% proposition
+\newenvironment{proposition}[1][]%
+{
+    \refstepcounter{mathtermscounter}%
+    \noindent\textbf{Proposición \themathtermscounter. \ifthenelse{\isempty{#1}}{}{(#1) }}%
+    \begin{itshape}%
+    \noindent\ignorespaces
+}
+{
+    \end{itshape}%
+    \noindent\ignorespacesafterend
+}
+
+% corollary
+\newenvironment{corollary}%
+{
+    \refstepcounter{mathtermscounter}%
+    \noindent\textbf{Corolario \themathtermscounter. }%
+    \begin{itshape}%
+    \noindent\ignorespaces
+}
+{
+    \end{itshape}%
+    \noindent\ignorespacesafterend
+}
+
+% proof
+\renewenvironment{proof}%
+{
+    \noindent\textit{Demostración. }%
+    \noindent\ignorespaces
+    \setlength{\parindent}{0em}
+}
+{
+    \qed
+    \setlength{\parindent}{1.5em}
+    \noindent\ignorespacesafterend
+}
+
+% observation
+\newenvironment{observation}%
+{
+    \refstepcounter{mathtermscounter}%
+    \noindent\textbf{Observación \themathtermscounter. }%
+    \noindent\ignorespaces
+}
+{
+    \noindent\ignorespacesafterend
+}
+
+% notation
+\newenvironment{notation}%
+{
+    \noindent\textbf{Notación. }%
+    \noindent\ignorespaces
+}
+{
+    \noindent\ignorespacesafterend
+}
+
+% example
+\newenvironment{example}[1][]%
+{
+    \refstepcounter{mathtermscounter}%
+    \noindent\textbf{Ejemplo \themathtermscounter. \ifthenelse{\isempty{#1}}{}{(#1) }}%
+    \noindent\ignorespaces
+    \setlength{\parindent}{0em}
+}
+{
+    \setlength{\parindent}{1.5em}
+    \noindent\ignorespacesafterend
+}
